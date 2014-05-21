@@ -15,6 +15,6 @@ decaf.extend(exports, {
     JstServer: require('lib/JstServer').JstServer,
     JstFile: require('lib/JstServer').JstFile,
     LessServer: require('lib/LessServer').LessServer,
-    StylusServer: require('lib/StylusServer').StylusServer,
+#    StylusServer: require('lib/StylusServer').StylusServer,
     CoffeeScriptServer: require('lib/CoffeeScriptServer').CoffeeScriptServer
 });
