@@ -1,4 +1,12 @@
-decaf-jolt
-==========
+Decaf's Jolt Application Framework
+==================================
 
-WWW Server/Application framework for decaf
+In a JST file, you can
+
+    throw 404;
+
+or
+
+    throw 403;
+
+StaticServer and StaticFile support GZIP content encoding.
