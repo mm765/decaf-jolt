@@ -141,20 +141,25 @@ app.verb('static', new StaticServer('/path/to/static/files'));
 ```
 
 All requested URLs beginning with /static/ will be served from /path/to/static/files.  Examples:
+```
     /static/a.js will be served from /path/to/static/files/a.js
     /static/a/b.js will be served from /path/to/static/files/a/b.js
     etc.
-
+```
 Remember, a verb cannot have a / in it.  The path/to/static/files may be absolute (anywhere in the file system) or relative (as in relative to the project/app/site root directory).
 
 You may have more than one verb that uses StaticServer.  Consider:
+```javascript
     app.verb('js', new StaticServer('client/scripts'));
     app.verb('css', new StaticServer('client/stylesheets'));
+```
 In this example, /js/whatever will be served from the relative path ./client/scripts/whatever, and /css/whatever will be served from the relative path ./client/stylesheets/whatever.
 
 StaticServer handles serving static files from directories, but sometimes you want to serve a single static file for a specific verb.  Consider:
+```javascript
     app.verb('/', new StaticFile('client/index.html'));
     app.verb('favicon.ico', new StaticFile('client/resources/favicon.ico'));
+```
 In this example, requests for / (index.html) will be served from client/index.html and /favicon.ico will be served from ./client/resources/favicon.ico.
 
 ### CoffeeScriptServer
