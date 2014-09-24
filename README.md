@@ -155,7 +155,7 @@ You may have more than one verb that uses StaticServer.  Consider:
 ```
 In this example, /js/whatever will be served from the relative path ./client/scripts/whatever, and /css/whatever will be served from the relative path ./client/stylesheets/whatever.
 
-StaticServer handles serving static files from directories, but sometimes you want to serve a single static file for a specific verb.  Consider:
+StaticServer handles serving static files from directories, but sometimes you want to serve a single static file for a specific verb.  Jolt provides StaticFile class for this purpose.  Consider:
 ```javascript
     app.verb('/', new StaticFile('client/index.html'));
     app.verb('favicon.ico', new StaticFile('client/resources/favicon.ico'));
