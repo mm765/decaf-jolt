@@ -244,6 +244,6 @@ The SjsServer class serves .sjs files from a directory structure, much like a st
 
 This behavior allows you to write, run, and debug your server-side JavaScript without restarting the server.
 
-As with StaticServer, there is a SjSFile class that allows you to route a verb directly to a single .sjs file.
+As with StaticServer, there is a SjsFile class that allows you to route a verb directly to a single .sjs file.
 
 
