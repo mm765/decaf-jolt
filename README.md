@@ -121,16 +121,46 @@ If you're implementing server-side sessions, you might add an endRequest handler
 
 Jolt provides a handful of handy helper classes that implement handlers for common use cases:
 
+* StaticServer
 * CoffeeScriptServer
 * JstServer
 * LessServer
 * SjsServer
-* StaticServer
 * StylusServer
 
 These handlers replace the need for "watchers" for various languages.  You can edit files served by these handlers and reload your browser and see the changes take effect immediately without restarting your server.
 
 The general rule is if you modify some file that is loaded via require(), you **WILL** need to restart your server.  Otherwise you won't.
+
+### StaticServer
+
+Applications almost always need to serve static files from a directory heirarchy.  Jolt provides the StaticServer  class for this purpose.  Simply put your static files in a directory structure and use the class something like this:
+
+```javascript
+app.verb('static', new StaticServer('/path/to/static/files'));
+```
+
+All requested URLs beginning with /static/ will be served from /path/to/static/files.  Examples:
+```
+    /static/a.js will be served from /path/to/static/files/a.js
+    /static/a/b.js will be served from /path/to/static/files/a/b.js
+    etc.
+```
+Remember, a verb cannot have a / in it.  The path/to/static/files may be absolute (anywhere in the file system) or relative (as in relative to the project/app/site root directory).
+
+You may have more than one verb that uses StaticServer.  Consider:
+```javascript
+    app.verb('js', new StaticServer('client/scripts'));
+    app.verb('css', new StaticServer('client/stylesheets'));
+```
+In this example, /js/whatever will be served from the relative path ./client/scripts/whatever, and /css/whatever will be served from the relative path ./client/stylesheets/whatever.
+
+StaticServer handles serving static files from directories, but sometimes you want to serve a single static file for a specific verb.  Jolt provides StaticFile class for this purpose.  Consider:
+```javascript
+    app.verb('/', new StaticFile('client/index.html'));
+    app.verb('favicon.ico', new StaticFile('client/resources/favicon.ico'));
+```
+In this example, requests for / (index.html) will be served from client/index.html and /favicon.ico will be served from ./client/resources/favicon.ico.
 
 ### CoffeeScriptServer
 
@@ -213,4 +243,7 @@ Sjs stands for "Server-side JavaScript."
 The SjsServer class serves .sjs files from a directory structure, much like a static WWW server.  Each .sjs file is compiled into a Function() when the URI associated with it is requested the first time.  Each successive request, the Function() is simply called, unless the .sjs file has changed on disk.  If it has changed, it is recompiled into a Function() and the new Function() used going forward. 
 
 This behavior allows you to write, run, and debug your server-side JavaScript without restarting the server.
+
+As with StaticServer, there is a SjsFile class that allows you to route a verb directly to a single .sjs file.
+
 
