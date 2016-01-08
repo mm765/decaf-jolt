@@ -36,12 +36,12 @@ The req object is augmented by Jolt to include a req.verb member that will conta
 You route verbs to handler functions or objects that have handler members that are functions.  This is done with the app.verb() method:
 
 ```javascript
-app.verb('blog', function(config, req, res) {
+app.verb('blog', function(req, res) {
    res.send('blog entry requested is ' + req.args[0]);
 ));
 ```
 
-The config argument passed your handler is an object that contains a handler member pointing at your handler function.  You can add to this config object in your handler function as you see fit.  Just don't replace the handler member with some incompatible value or delete it.
+The if you pass a config object to app.verb(), then the config argument will be passed to your handler as an object that contains a handler member pointing at your handler function.  You can add to this config object in your handler function as you see fit.  Just don't replace the handler member with some incompatible value or delete it.
 
 ```
 app.verb('blog', {
@@ -56,7 +56,7 @@ Note that the **verbs must not contain a ```/``` character**, except in the case
 
 ```
 // if the requested URI is http://whatever.com/, this verb is called:
-app.verb('/', function(config, req, res) {
+app.verb('/', function(req, res) {
 	res.send('Site Home Page');
 });
 ```
